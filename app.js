@@ -22,9 +22,9 @@ var region = process.env.REGION
 http.createServer(function (request, response) {
     try {
         var requestUrl = url.parse(request.url)
-        //requestUrl = path.normalize(requestUrl.pathname) + "_" + region + ".html";
+        requestUrl = path.normalize(requestUrl.pathname) + "_" + region + ".html";
         // need to use path.normalize so people can't access directories underneath baseDirectory
-        var fsPath = baseDirectory+path.normalize(requestUrl.pathname)
+        var fsPath = baseDirectory+requestUrl
 
         var fileStream = fs.createReadStream(fsPath)
         fileStream.pipe(response)
