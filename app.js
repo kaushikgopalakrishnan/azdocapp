@@ -17,11 +17,12 @@ var path = require('path')
 var baseDirectory = __dirname   // or whatever base directory you want
 
 var port = process.env.PORT || 8080
+var region = process.env.REGION
 
 http.createServer(function (request, response) {
     try {
         var requestUrl = url.parse(request.url)
-
+        requestUrl = requestUrl + "_" + region + ".html";
         // need to use path.normalize so people can't access directories underneath baseDirectory
         var fsPath = baseDirectory+path.normalize(requestUrl.pathname)
 
